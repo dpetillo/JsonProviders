@@ -6,6 +6,7 @@
         "Test3Property": 1,
         "Test4Property": false,
         "Test5Property": [ "val1", "baz" ],
+        "Test6Property": "2012-04-23T18:25:43.511Z",
 
         "overrides": {
             "Override1": {
@@ -13,7 +14,7 @@
                 "Test4Property": true
             },
             "Override2": {
-                "Test2Property": "bar",
+                "Test2Property": 0.1,
                 "Test4Property": true,
                 "Test5Property": [ "test" ]
             }

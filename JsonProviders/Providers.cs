@@ -34,6 +34,11 @@ namespace JsonProviders
             _providersImpl.SetOverride(o);
         }
 
+        public static void ClearForUnitTesting()
+        {
+            _providersImpl = new ProvidersImpl();
+        }
+
     }
 
 }
