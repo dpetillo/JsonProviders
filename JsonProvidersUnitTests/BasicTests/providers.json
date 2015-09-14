@@ -1,0 +1,22 @@
+﻿{
+    "BasicTestProvider": {
+        "type": "JsonProvidersUnitTests.BasicTestProvider, JsonProvidersUnitTests",
+        "Test1Property": "foo",
+        "Test2Property": 1.0,
+        "Test3Property": 1,
+        "Test4Property": false,
+        "Test5Property": [ "val1", "baz" ],
+
+        "overrides": {
+            "Override1": {
+                "Test3Property": 2,
+                "Test4Property": true
+            },
+            "Override2": {
+                "Test2Property": "bar",
+                "Test4Property": true,
+                "Test5Property": [ "test" ]
+            }
+        }
+    }
+}

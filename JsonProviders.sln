@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonProviders", "JsonProviders\JsonProviders.csproj", "{576775E6-2878-4316-8506-7FCB788B912D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonProvidersUnitTests", "JsonProvidersUnitTests\JsonProvidersUnitTests.csproj", "{249C91D1-9CFF-415C-9CFE-4F815622F03A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{576775E6-2878-4316-8506-7FCB788B912D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{576775E6-2878-4316-8506-7FCB788B912D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{576775E6-2878-4316-8506-7FCB788B912D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{576775E6-2878-4316-8506-7FCB788B912D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{249C91D1-9CFF-415C-9CFE-4F815622F03A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{249C91D1-9CFF-415C-9CFE-4F815622F03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{249C91D1-9CFF-415C-9CFE-4F815622F03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{249C91D1-9CFF-415C-9CFE-4F815622F03A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
