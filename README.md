@@ -1,8 +1,8 @@
 # JsonProviders
 
-Json formatted Provider model for .NET 
+Json formatted Provider Model for .NET 
 
-Remember the provider model? 
+Remember the Provider Model? 
 
 https://en.wikipedia.org/wiki/Provider_model
 
