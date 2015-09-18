@@ -19,9 +19,17 @@ namespace JsonProviders
             return _providersImpl.GetProvider<T>(name);
         }
 
+        public static IEnumerable<string> GetProviders<T>()
+        {
+            return _providersImpl.GetProviders<T>();
+        }
+
         public static void Configure(string fileName)
         {
-
+            using (var fs = File.OpenRead(fileName))
+            {
+                _providersImpl.Parse(fs);
+            }
         }
 
         public static void Configure(Stream configStream)

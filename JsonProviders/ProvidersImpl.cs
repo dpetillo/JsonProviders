@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Reflection;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Concurrent;
@@ -37,7 +38,7 @@ namespace JsonProviders
             {
                 throw new ArgumentException(string.Format("Provider name {0} is not configured", name));
             }
-            
+
             if (!_providerTypes[name].IsAssignableFrom(typeof(T)))
             {
                 throw new ArgumentException(string.Format("Provider type for {0} is not assignable from type {1}", name, typeof(T).Name));
@@ -46,6 +47,13 @@ namespace JsonProviders
             return (T)_providers.GetOrAdd(name, BuildProvider<T>(name));
 
         }
+
+        public IEnumerable<string> GetProviders<T>()
+        {
+            Type t = typeof(T);
+            return _providerTypes.Where(o => o.Value != null && o.Value.IsAssignableFrom(t)).Select(o => o.Key).ToList();
+        }
+
 
         public void SetOverride(string ov)
         {
@@ -71,14 +79,12 @@ namespace JsonProviders
             foreach (var prop in _providerConfigs[name].Properties())
             {
                 var overridenProp = overrideObj != null ? overrideObj.Property(prop.Name) : null;
-                if (overridenProp != null)
+                if (overridenProp != null && TryApplyConfig(type, provider, overridenProp))
                 {
-                    TryApplyConfig(type, provider, overridenProp);
+                    continue;
                 }
-                else
-                {
-                    TryApplyConfig(type, provider, prop);
-                }
+
+                TryApplyConfig(type, provider, prop);
             }
 
             return provider;
@@ -91,29 +97,22 @@ namespace JsonProviders
                 return false;
             }
 
-            var codeProp = type.GetProperty(prop.Name);
+            var codeProp = type.GetProperty(prop.Name, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             if (codeProp == null)
             {
-                //TODO: deal with errors
+
+                LogParseError("Property '{0}' doesn't exist on target type: {1}", prop.Name, type.Name);
                 return false;
             }
 
             try
             {
-
-                if (prop.Value.Type == JTokenType.Array)
-                {
-                    //TODO: support other types
-                    codeProp.SetValue(o, prop.Value.ToObject<List<string>>().ToArray<string>());
-                }
-                else
-                {
-                    codeProp.SetValue(o, prop.Value.ToObject<object>());
-                }
+                 codeProp.SetValue(o, prop.Value.ToObject(codeProp.PropertyType));
             }
             catch (Exception e)
             {
-                //TODO: deal with errors
+                LogParseError("Exception setting value: {0}", e.Message);
+
                 return false;
             }
             return true;

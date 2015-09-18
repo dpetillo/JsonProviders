@@ -19,5 +19,13 @@
                 "Test5Property": [ "test" ]
             }
         }
+    },
+    "ConversionTestProvider": {
+        "type": "JsonProvidersUnitTests.ConversionTestProvider, JsonProvidersUnitTests",
+        "DateTimeProperty": "2012-04-23T18:25:43.511Z",
+        "TimeSpanProperty": "18:25:43.511",
+        "LongProperty": 5,
+        "IntProperty": 5,
+        "EnumProperty":  "EnumValue2"
     }
 }

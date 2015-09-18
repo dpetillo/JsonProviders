@@ -16,6 +16,22 @@ namespace JsonProvidersUnitTests
         public DateTime Test6Property { get; set; }
     }
 
+    public class ConversionTestProvider
+    {
+        public enum TestEnum
+        {
+            EnumValue1,
+            EnumValue2,
+            EnumValue3
+        }
+
+        internal DateTime DateTimeProperty { get; set; }
+        internal TimeSpan TimeSpanProperty { get; set; }
+        internal long LongProperty { get; set; }
+        internal int IntProperty { get; set; }
+        public TestEnum EnumProperty { get; set; }
+    }
+
     [TestClass]
     public class BasicTests
     {
@@ -82,6 +98,26 @@ namespace JsonProvidersUnitTests
             Assert.AreEqual(1, provider.Test5Property.Length);
             Assert.AreEqual("test", provider.Test5Property[0]);
             Assert.AreEqual(new DateTime(634708023435110000), provider.Test6Property);
+        }
+
+
+        [TestMethod]
+        public void Conversions()
+        {
+            Providers.ClearForUnitTesting();
+
+            using (Stream configStream = GetResourceStream())
+            {
+                Providers.Configure(configStream);
+            }
+
+            var provider = Providers.GetProvider<ConversionTestProvider>("ConversionTestProvider");
+
+            Assert.AreEqual(5, provider.LongProperty);
+            Assert.AreEqual(5, provider.IntProperty);
+            Assert.AreEqual(new DateTime(634708023435110000), provider.DateTimeProperty);
+            Assert.AreEqual(new TimeSpan(0, 18, 25, 43, 511), provider.TimeSpanProperty);
+            Assert.AreEqual(ConversionTestProvider.TestEnum.EnumValue2, provider.EnumProperty);
         }
 
 
